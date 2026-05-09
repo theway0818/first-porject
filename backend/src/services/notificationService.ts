@@ -1,5 +1,4 @@
-import db from '../db/database';
-import { emitToUser } from '../socket';
+import { sql } from '@vercel/postgres';
 
 interface NotificationPayload {
   userId: number;
@@ -9,19 +8,10 @@ interface NotificationPayload {
   relatedProjectId?: number;
 }
 
-export function createNotification(payload: NotificationPayload): void {
-  const stmt = db.prepare(
-    'INSERT INTO notifications (user_id, title, message, type, related_project_id) VALUES (?, ?, ?, ?, ?)'
-  );
-  const result = stmt.run(
-    payload.userId,
-    payload.title,
-    payload.message,
-    payload.type,
-    payload.relatedProjectId ?? null
-  );
-  const notification = db
-    .prepare('SELECT * FROM notifications WHERE id = ?')
-    .get(result.lastInsertRowid);
-  emitToUser(payload.userId, 'notification', notification);
+export async function createNotification(payload: NotificationPayload): Promise<void> {
+  await sql`
+    INSERT INTO notifications (user_id, title, message, type, related_project_id)
+    VALUES (${payload.userId}, ${payload.title}, ${payload.message}, ${payload.type},
+            ${payload.relatedProjectId ?? null})
+  `;
 }

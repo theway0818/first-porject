@@ -1,41 +1,25 @@
 import multer from 'multer';
-import path from 'path';
-import crypto from 'crypto';
-
-const UPLOAD_DIR = path.join(__dirname, '../../uploads');
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
-  filename: (_req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const unique = crypto.randomBytes(16).toString('hex');
-    cb(null, `${unique}${ext}`);
-  },
-});
 
 const ALLOWED_MIME = [
   'application/pdf',
-  'image/jpeg',
-  'image/png',
-  'image/gif',
-  'image/webp',
+  'image/jpeg', 'image/png', 'image/gif', 'image/webp',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'application/vnd.ms-excel',
-  'text/csv',
+  'application/vnd.ms-excel', 'text/csv',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   'application/msword',
   'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   'application/vnd.ms-powerpoint',
 ];
 
+// Vercel Blob을 사용하므로 메모리에 저장 후 직접 업로드
 export const upload = multer({
-  storage,
-  limits: { fileSize: Number(process.env.MAX_FILE_SIZE) || 52_428_800 },
+  storage: multer.memoryStorage(),
+  limits: { fileSize: Number(process.env.MAX_FILE_SIZE) || 4_500_000 }, // Vercel 4.5MB 제한
   fileFilter: (_req, file, cb) => {
     if (ALLOWED_MIME.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error(`지원하지 않는 파일 형식입니다: ${file.mimetype}`));
+      cb(new Error(`지원하지 않는 파일 형식: ${file.mimetype}`));
     }
   },
 });

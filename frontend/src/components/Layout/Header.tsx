@@ -17,7 +17,10 @@ export default function Header({ title }: { title: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    api.get('/notifications').then((r) => setNotifications(r.data));
+    const load = () => api.get('/notifications').then((r) => setNotifications(r.data));
+    load();
+    const timer = setInterval(load, 30_000); // 30초 폴링
+    return () => clearInterval(timer);
   }, []);
 
   const unread = notifications.filter((n) => !n.is_read).length;

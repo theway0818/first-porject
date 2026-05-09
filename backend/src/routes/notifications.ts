@@ -1,25 +1,25 @@
 import { Router, Request, Response } from 'express';
-import db from '../db/database';
+import { sql } from '@vercel/postgres';
 import { requireAuth } from '../middleware/auth';
 
 const router = Router();
 router.use(requireAuth);
 
-router.get('/', (req: Request, res: Response): void => {
-  const notifications = db.prepare(`
-    SELECT * FROM notifications WHERE user_id = ?
-    ORDER BY created_at DESC LIMIT 50`).all(req.user!.id);
-  res.json(notifications);
+router.get('/', async (req: Request, res: Response): Promise<void> => {
+  const { rows } = await sql`
+    SELECT * FROM notifications WHERE user_id = ${req.user!.id}
+    ORDER BY created_at DESC LIMIT 50
+  `;
+  res.json(rows);
 });
 
-router.patch('/:id/read', (req: Request, res: Response): void => {
-  db.prepare('UPDATE notifications SET is_read = 1 WHERE id = ? AND user_id = ?')
-    .run(Number(req.params.id), req.user!.id);
+router.patch('/:id/read', async (req: Request, res: Response): Promise<void> => {
+  await sql`UPDATE notifications SET is_read = 1 WHERE id = ${Number(req.params.id)} AND user_id = ${req.user!.id}`;
   res.status(204).send();
 });
 
-router.patch('/read-all', (req: Request, res: Response): void => {
-  db.prepare('UPDATE notifications SET is_read = 1 WHERE user_id = ?').run(req.user!.id);
+router.patch('/read-all', async (req: Request, res: Response): Promise<void> => {
+  await sql`UPDATE notifications SET is_read = 1 WHERE user_id = ${req.user!.id}`;
   res.status(204).send();
 });
 

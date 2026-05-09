@@ -17,7 +17,6 @@
     "react-dom": "^19.2.5",
     "react-pdf": "^10.4.1",
     "react-router-dom": "^7.15.0",
-    "socket.io-client": "^4.8.3",
     "tailwindcss": "^4.3.0",
     "xlsx": "^0.18.5"
   },

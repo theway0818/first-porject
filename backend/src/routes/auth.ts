@@ -1,30 +1,18 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../db/database';
+import { sql } from '@vercel/postgres';
 import { requireAuth } from '../middleware/auth';
 
 const router = Router();
 
-interface UserRow {
-  id: number;
-  name: string;
-  email: string;
-  password_hash: string;
-  role: 'admin' | 'manager' | 'member';
-  team: string;
-}
-
-router.post('/login', (req: Request, res: Response): void => {
+router.post('/login', async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    res.status(400).json({ error: '이메일과 비밀번호를 입력해주세요' });
-    return;
-  }
-  const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email) as UserRow | undefined;
-  if (!user || !bcrypt.compareSync(password, user.password_hash)) {
-    res.status(401).json({ error: '이메일 또는 비밀번호가 올바르지 않습니다' });
-    return;
+  if (!email || !password) { res.status(400).json({ error: '이메일과 비밀번호를 입력해주세요' }); return; }
+  const { rows } = await sql`SELECT * FROM users WHERE email = ${email}`;
+  const user = rows[0];
+  if (!user || !bcrypt.compareSync(password, user.password_hash as string)) {
+    res.status(401).json({ error: '이메일 또는 비밀번호가 올바르지 않습니다' }); return;
   }
   const token = jwt.sign(
     { id: user.id, email: user.email, role: user.role },
@@ -34,15 +22,10 @@ router.post('/login', (req: Request, res: Response): void => {
   res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role, team: user.team } });
 });
 
-router.get('/me', requireAuth, (req: Request, res: Response): void => {
-  const user = db
-    .prepare('SELECT id, name, email, role, team, created_at FROM users WHERE id = ?')
-    .get(req.user!.id);
-  if (!user) {
-    res.status(404).json({ error: '사용자를 찾을 수 없습니다' });
-    return;
-  }
-  res.json(user);
+router.get('/me', requireAuth, async (req: Request, res: Response): Promise<void> => {
+  const { rows } = await sql`SELECT id, name, email, role, team, created_at FROM users WHERE id = ${req.user!.id}`;
+  if (!rows[0]) { res.status(404).json({ error: '사용자를 찾을 수 없습니다' }); return; }
+  res.json(rows[0]);
 });
 
 export default router;
