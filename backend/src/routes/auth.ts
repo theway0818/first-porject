@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { sql } from '@vercel/postgres';
+import { sql } from '../db/database';
 import { requireAuth } from '../middleware/auth';
 
 const router = Router();

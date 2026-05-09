@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { put, del } from '@vercel/blob';
-import { sql } from '@vercel/postgres';
+import { sql } from '../db/database';
 import { requireAuth } from '../middleware/auth';
 import { upload } from '../middleware/upload';
 import crypto from 'crypto';

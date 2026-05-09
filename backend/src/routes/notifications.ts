@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { sql } from '@vercel/postgres';
+import { sql } from '../db/database';
 import { requireAuth } from '../middleware/auth';
 
 const router = Router();

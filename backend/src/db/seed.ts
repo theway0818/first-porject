@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import bcrypt from 'bcryptjs';
-import { sql } from '@vercel/postgres';
+import { sql } from './database';
 import fs from 'fs';
 import path from 'path';
 

@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import { sql } from '@vercel/postgres';
+import { sql } from '../db/database';
 import { requireAuth, requireRole } from '../middleware/auth';
 
 const router = Router();
