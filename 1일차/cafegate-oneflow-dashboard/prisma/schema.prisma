@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model CodeRequest {
+  id                Int       @id @default(autoincrement())
+  productName       String
+  category          String
+  storageType       String
+  supplierName      String
+  supplierContact   String?
+  supplierPhone     String?
+  supplierEmail     String?
+  shelfLife         String?
+  leadTime          Int?
+  initialLeadTime   Int?
+  monthlyUsage      Int?
+  initialOrderQty   Int?
+  cjDeliveryDate    DateTime?
+  taxType           String?
+  moqDelivery       String?
+  unitWeight        Float?
+  packBoxQty        Int?
+  requestType       String    @default("NEW")
+  requestTeam       String
+  requesterName     String
+  receivedDate      DateTime  @default(now())
+  receivedConfirmed Boolean   @default(false)
+  cjRequested       Boolean   @default(false)
+  cjRequestedDate   DateTime?
+  completed         Boolean   @default(false)
+  completedDate     DateTime?
+  status            String    @default("DRAFT")
+  note              String?
+  projectId         Int?
+  project           Project?  @relation(fields: [projectId], references: [id])
+}
+
+model Project {
+  id           Int           @id @default(autoincrement())
+  projectName  String
+  launchDate   DateTime
+  status       String        @default("PLANNING")
+  description  String?
+  tasks        ProjectTask[]
+  codeRequests CodeRequest[]
+}
+
+model ProjectTask {
+  id           Int      @id @default(autoincrement())
+  projectId    Int
+  teamName     String
+  taskName     String
+  dueDate      DateTime
+  status       String   @default("TODO")
+  assignee     String?
+  weeklyUpdate String?
+  project      Project  @relation(fields: [projectId], references: [id])
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  team  String
+  role  String @default("MEMBER")
+}
+
+model KpiLog {
+  id          Int      @id @default(autoincrement())
+  measureDate DateTime @default(now())
+  kpiName     String
+  value       Float
+  target      Float
+}
