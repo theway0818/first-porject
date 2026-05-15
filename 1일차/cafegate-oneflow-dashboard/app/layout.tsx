@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ONE FLOW — 모든 업무, 하나의 흐름으로",
-  description: "파편 없이. 지연 없이. 하나의 흐름으로.",
+  description: "흐름이 이어지면, 팀이 이어진다.",
 };
 
 export default function RootLayout({
