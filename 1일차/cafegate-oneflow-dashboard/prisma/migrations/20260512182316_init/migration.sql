@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "CodeRequest" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "productName" TEXT NOT NULL,
     "category" TEXT NOT NULL,
     "storageType" TEXT NOT NULL,
@@ -13,65 +13,79 @@ CREATE TABLE "CodeRequest" (
     "initialLeadTime" INTEGER,
     "monthlyUsage" INTEGER,
     "initialOrderQty" INTEGER,
-    "cjDeliveryDate" DATETIME,
+    "cjDeliveryDate" TIMESTAMP(3),
     "taxType" TEXT,
     "moqDelivery" TEXT,
-    "unitWeight" REAL,
+    "unitWeight" DOUBLE PRECISION,
     "packBoxQty" INTEGER,
     "requestType" TEXT NOT NULL DEFAULT 'NEW',
     "requestTeam" TEXT NOT NULL,
     "requesterName" TEXT NOT NULL,
-    "receivedDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "receivedDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "receivedConfirmed" BOOLEAN NOT NULL DEFAULT false,
     "cjRequested" BOOLEAN NOT NULL DEFAULT false,
-    "cjRequestedDate" DATETIME,
+    "cjRequestedDate" TIMESTAMP(3),
     "completed" BOOLEAN NOT NULL DEFAULT false,
-    "completedDate" DATETIME,
+    "completedDate" TIMESTAMP(3),
     "status" TEXT NOT NULL DEFAULT 'DRAFT',
     "note" TEXT,
     "projectId" INTEGER,
-    CONSTRAINT "CodeRequest_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+
+    CONSTRAINT "CodeRequest_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Project" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "projectName" TEXT NOT NULL,
-    "launchDate" DATETIME NOT NULL,
+    "launchDate" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PLANNING',
-    "description" TEXT
+    "description" TEXT,
+
+    CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "ProjectTask" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "projectId" INTEGER NOT NULL,
     "teamName" TEXT NOT NULL,
     "taskName" TEXT NOT NULL,
-    "dueDate" DATETIME NOT NULL,
+    "dueDate" TIMESTAMP(3) NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'TODO',
     "assignee" TEXT,
     "weeklyUpdate" TEXT,
-    CONSTRAINT "ProjectTask_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+
+    CONSTRAINT "ProjectTask_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "team" TEXT NOT NULL,
-    "role" TEXT NOT NULL DEFAULT 'MEMBER'
+    "role" TEXT NOT NULL DEFAULT 'MEMBER',
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "KpiLog" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "measureDate" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "id" SERIAL NOT NULL,
+    "measureDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "kpiName" TEXT NOT NULL,
-    "value" REAL NOT NULL,
-    "target" REAL NOT NULL
+    "value" DOUBLE PRECISION NOT NULL,
+    "target" DOUBLE PRECISION NOT NULL,
+
+    CONSTRAINT "KpiLog_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "CodeRequest" ADD CONSTRAINT "CodeRequest_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ProjectTask" ADD CONSTRAINT "ProjectTask_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

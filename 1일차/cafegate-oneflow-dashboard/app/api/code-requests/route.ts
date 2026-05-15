@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { apiLogger } from "@/lib/logger";
+
+const logger = apiLogger("api/code-requests");
 
 export async function GET(req: NextRequest) {
   try {
@@ -18,7 +21,7 @@ export async function GET(req: NextRequest) {
     });
     return NextResponse.json(requests);
   } catch (e) {
-    console.error(e);
+    logger.error("GET 조회 실패", e);
     return NextResponse.json({ error: "데이터 조회 실패" }, { status: 500 });
   }
 }
@@ -27,9 +30,10 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const created = await prisma.codeRequest.create({ data: body });
+    logger.info(`POST 등록 완료 id=${created.id}`);
     return NextResponse.json(created, { status: 201 });
   } catch (e) {
-    console.error(e);
+    logger.error("POST 등록 실패", e);
     return NextResponse.json({ error: "등록 실패" }, { status: 500 });
   }
 }
@@ -40,9 +44,10 @@ export async function PATCH(req: NextRequest) {
     const { id, ...data } = body;
     if (!id) return NextResponse.json({ error: "id 필요" }, { status: 400 });
     const updated = await prisma.codeRequest.update({ where: { id: Number(id) }, data });
+    logger.info(`PATCH 수정 완료 id=${id}`);
     return NextResponse.json(updated);
   } catch (e) {
-    console.error(e);
+    logger.error("PATCH 수정 실패", e);
     return NextResponse.json({ error: "업데이트 실패" }, { status: 500 });
   }
 }

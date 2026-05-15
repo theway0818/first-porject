@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONE FLOW 로고 쇼케이스</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      padding: 40px 24px;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #64748B;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 16px;
+    }
+
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .concept-badge {
+      background: linear-gradient(135deg, #2563EB, #7C3AED);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+
+    .preview-card {
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .preview-card.dark {
+      background: #0F172A;
+    }
+
+    .preview-card.checker {
+      background-image:
+        linear-gradient(45deg, #E2E8F0 25%, transparent 25%),
+        linear-gradient(-45deg, #E2E8F0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #E2E8F0 75%),
+        linear-gradient(-45deg, transparent 75%, #E2E8F0 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      color: #94A3B8;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .preview-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .usage-guide {
+      background: #F1F5F9;
+      border-left: 3px solid #2563EB;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px;
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .usage-guide strong {
+      color: #1E293B;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #E2E8F0;
+      margin: 56px 0;
+    }
+
+    /* 아이콘 크기 변형 데모 */
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ONE FLOW · Brand Logo System · 2026</h1>
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 컨셉 1: 심볼 + 워드마크 조합형 -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="concept-badge">CONCEPT 01</span>
+      <span class="section-title">심볼 + 워드마크 조합형 (가로형)</span>
+    </div>
+    <p class="section-desc">
+      여러 흐름이 하나로 합류하는 심볼을 "ONE"과 "FLOW" 워드마크와 결합한 형태입니다.
+      블루(#2563EB) → 퍼플(#7C3AED) 그라디언트로 통합과 연결의 이미지를 표현했습니다.
+      헤더, 로그인 화면, 공식 문서의 대표 로고로 적합합니다.
+    </p>
+
+    <div class="preview-row">
+      <div class="preview-col">
+        <div class="preview-card">
+          <img src="oneflow-logo-horizontal.svg" alt="ONE FLOW 가로형 로고" width="320" height="80">
+        </div>
+        <span class="preview-label">Light Background</span>
+      </div>
+
+      <div class="preview-col">
+        <div class="preview-card checker">
+          <img src="oneflow-logo-horizontal.svg" alt="ONE FLOW 가로형 로고 투명 배경" width="320" height="80">
+        </div>
+        <span class="preview-label">Transparent Check</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;" class="usage-guide">
+      <strong>권장 사용처:</strong> 앱 헤더 네비게이션, 로그인/스플래시 화면, 이메일 서명,
+      공식 제안서·보고서 커버, 마케팅 배너 (가로 여백이 충분한 환경)
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 컨셉 2: 심볼 단독형 (앱 아이콘) -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="concept-badge">CONCEPT 02</span>
+      <span class="section-title">심볼 단독형 (정방형 앱 아이콘)</span>
+    </div>
+    <p class="section-desc">
+      "1"의 형태와 흐름(Flow) 곡선을 통합한 앱 아이콘입니다. 딥블루 → 인디고 → 퍼플 그라디언트
+      배경에 흰색 심볼이 올라가는 구조로, 작은 크기에서도 가독성이 유지됩니다.
+      시안 계열 포인트 라인이 "방향성 있는 흐름"을 표현합니다.
+    </p>
+
+    <div class="size-row">
+      <div class="size-item">
+        <div class="preview-card" style="padding: 16px;">
+          <img src="oneflow-icon.svg" alt="ONE FLOW 아이콘 512" width="120" height="120">
+        </div>
+        <span class="preview-label">120×120</span>
+      </div>
+      <div class="size-item">
+        <div class="preview-card" style="padding: 16px;">
+          <img src="oneflow-icon.svg" alt="ONE FLOW 아이콘 80" width="80" height="80">
+        </div>
+        <span class="preview-label">80×80</span>
+      </div>
+      <div class="size-item">
+        <div class="preview-card" style="padding: 12px;">
+          <img src="oneflow-icon.svg" alt="ONE FLOW 아이콘 48" width="48" height="48">
+        </div>
+        <span class="preview-label">48×48</span>
+      </div>
+      <div class="size-item">
+        <div class="preview-card" style="padding: 10px;">
+          <img src="oneflow-icon.svg" alt="ONE FLOW 아이콘 32" width="32" height="32">
+        </div>
+        <span class="preview-label">32×32</span>
+      </div>
+      <div class="size-item">
+        <div class="preview-card" style="padding: 8px;">
+          <img src="oneflow-icon.svg" alt="ONE FLOW 아이콘 16" width="16" height="16">
+        </div>
+        <span class="preview-label">16×16 파비콘</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;" class="usage-guide">
+      <strong>권장 사용처:</strong> 브라우저 파비콘, 모바일 앱 아이콘 (iOS/Android),
+      Slack·Notion 워크스페이스 아이콘, 사이드바 로고 (공간 제약 환경),
+      SNS 프로필 이미지, 알림 뱃지
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ──────────────────────────────────────── -->
+  <!-- 컨셉 3: 미니멀 워드마크형 -->
+  <!-- ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="concept-badge">CONCEPT 03</span>
+      <span class="section-title">미니멀 워드마크형</span>
+    </div>
+    <p class="section-desc">
+      심볼 없이 타이포그래피만으로 브랜드를 표현합니다. "ONE"(굵음·다크)과 "FLOW"(가벼움·그라디언트)의
+      대비, 그리고 두 단어 사이를 연결하는 S-커브 플로우 라인이 브랜드 스토리를 담습니다.
+      라이트/다크 두 버전 모두 제공하며 모노크롬 환경에서도 자연스럽습니다.
+    </p>
+
+    <div class="preview-row">
+      <div class="preview-col">
+        <div class="preview-card">
+          <img src="oneflow-wordmark.svg" alt="ONE FLOW 워드마크 라이트" width="280" height="64">
+        </div>
+        <span class="preview-label">Light Version</span>
+      </div>
+
+      <div class="preview-col">
+        <div class="preview-card dark">
+          <img src="oneflow-wordmark-dark.svg" alt="ONE FLOW 워드마크 다크" width="280" height="64">
+        </div>
+        <span class="preview-label">Dark Version</span>
+      </div>
+
+      <div class="preview-col">
+        <div class="preview-card checker">
+          <img src="oneflow-wordmark.svg" alt="ONE FLOW 워드마크 투명" width="280" height="64">
+        </div>
+        <span class="preview-label">Transparent Check</span>
+      </div>
+    </div>
+
+    <!-- 스케일 테스트 -->
+    <div style="margin-top: 24px;">
+      <p class="preview-label" style="margin-bottom: 12px;">크기 스케일 테스트</p>
+      <div class="preview-card" style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start; padding: 32px 40px;">
+        <img src="oneflow-wordmark.svg" alt="" width="280" height="64">
+        <img src="oneflow-wordmark.svg" alt="" width="210" height="48">
+        <img src="oneflow-wordmark.svg" alt="" width="140" height="32">
+        <img src="oneflow-wordmark.svg" alt="" width="105" height="24">
+      </div>
+    </div>
+
+    <div style="margin-top: 20px;" class="usage-guide">
+      <strong>권장 사용처:</strong> 인쇄물·명함·브로셔 (모노크롬 인쇄 포함), 이메일 푸터,
+      협업 문서 헤더, 화이트라벨 환경, 심볼 없이 텍스트 중심 레이아웃이 필요한 UI 컴포넌트
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 색상 팔레트 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title" style="font-size:14px; color:#64748B; font-weight:600; letter-spacing:2px;">COLOR SYSTEM</span>
+    </div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:16px;">
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:#2563EB;border-radius:12px;margin-bottom:8px;"></div>
+        <div style="font-size:11px;color:#475569;font-weight:600;">Primary</div>
+        <div style="font-size:10px;color:#94A3B8;">#2563EB</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:#7C3AED;border-radius:12px;margin-bottom:8px;"></div>
+        <div style="font-size:11px;color:#475569;font-weight:600;">Accent</div>
+        <div style="font-size:10px;color:#94A3B8;">#7C3AED</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:#38BDF8;border-radius:12px;margin-bottom:8px;"></div>
+        <div style="font-size:11px;color:#475569;font-weight:600;">Flow</div>
+        <div style="font-size:10px;color:#94A3B8;">#38BDF8</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:#0F172A;border-radius:12px;margin-bottom:8px;"></div>
+        <div style="font-size:11px;color:#475569;font-weight:600;">Dark BG</div>
+        <div style="font-size:10px;color:#94A3B8;">#0F172A</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:64px;height:64px;background:#F8FAFC;border-radius:12px;border:1px solid #E2E8F0;margin-bottom:8px;"></div>
+        <div style="font-size:11px;color:#475569;font-weight:600;">Light BG</div>
+        <div style="font-size:10px;color:#94A3B8;">#F8FAFC</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

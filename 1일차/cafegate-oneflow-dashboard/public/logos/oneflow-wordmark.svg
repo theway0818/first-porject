@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64" role="img" aria-label="ONE FLOW wordmark">
+  <defs>
+    <!-- "FLOW" 그라디언트 -->
+    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+
+    <!-- 구분 라인 그라디언트 -->
+    <linearGradient id="dividerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#2563EB" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#7C3AED" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 다크 배경용 흰색 버전을 위한 필터 (런타임에서 CSS로 전환 가능) -->
+  </defs>
+
+  <!-- ───── 라이트 버전 (기본) ───── -->
+
+  <!-- "ONE" - 굵고 다크 -->
+  <text
+    x="14"
+    y="43"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="34"
+    font-weight="800"
+    letter-spacing="4"
+    fill="#0F172A"
+  >ONE</text>
+
+  <!-- 중간 플로우 연결 심볼 (작은 S-커브 라인) -->
+  <!-- "ONE"과 "FLOW" 사이의 시각적 브릿지 -->
+  <path
+    d="M 124 26 C 128 26, 128 32, 132 32 C 136 32, 136 38, 140 38"
+    fill="none"
+    stroke="url(#flowGrad)"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- 브릿지 시작 도트 -->
+  <circle cx="124" cy="26" r="2.8" fill="#2563EB"/>
+
+  <!-- 브릿지 끝 도트 -->
+  <circle cx="140" cy="38" r="2.8" fill="#7C3AED"/>
+
+  <!-- "FLOW" - 가볍고 그라디언트 -->
+  <text
+    x="148"
+    y="43"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="34"
+    font-weight="300"
+    letter-spacing="5"
+    fill="url(#flowGrad)"
+  >FLOW</text>
+
+  <!-- 하단 장식 라인 (전체 폭) -->
+  <rect x="14" y="51" width="252" height="1.2" rx="0.6" fill="url(#dividerGrad)"/>
+
+  <!-- 하단 서브태그라인 -->
+  <text
+    x="14"
+    y="62"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="8"
+    font-weight="400"
+    letter-spacing="3.5"
+    fill="#64748B"
+  >TEAM COLLABORATION</text>
+</svg>

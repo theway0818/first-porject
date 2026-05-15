@@ -9,24 +9,40 @@ interface KpiCardProps {
 }
 
 export default function KpiCard({ name, value, target, unit, status }: KpiCardProps) {
-  const colors = {
-    good: "bg-green-50 border-green-200 text-green-700",
-    warn: "bg-yellow-50 border-yellow-200 text-yellow-700",
-    bad: "bg-red-50 border-red-200 text-red-700",
+  const styles = {
+    good: {
+      card: "bg-white border-[#E2E8F0]",
+      dot: "bg-[#10B981]",
+      value: "text-[#0F172A]",
+      label: "text-[#10B981]",
+    },
+    warn: {
+      card: "bg-white border-[#E2E8F0]",
+      dot: "bg-[#F59E0B]",
+      value: "text-[#0F172A]",
+      label: "text-[#F59E0B]",
+    },
+    bad: {
+      card: "bg-[#FEF2F2] border-[#FECACA]",
+      dot: "bg-[#EF4444]",
+      value: "text-[#EF4444]",
+      label: "text-[#EF4444]",
+    },
   };
-  const icons = { good: "🟢", warn: "🟡", bad: "🔴" };
+
+  const s = styles[status];
 
   return (
-    <div className={`border-2 rounded-xl p-5 ${colors[status]}`}>
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm font-medium opacity-80">{name}</span>
-        <span className="text-lg">{icons[status]}</span>
+    <div className={`border rounded-2xl p-5 ${s.card}`}>
+      <div className="flex items-center gap-2 mb-3">
+        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${s.dot}`} />
+        <span className="text-xs font-medium text-[#475569] leading-tight">{name}</span>
       </div>
-      <div className="text-3xl font-bold">
+      <div className={`text-3xl font-black ${s.value}`}>
         {value}
-        <span className="text-lg font-normal ml-1">{unit}</span>
+        <span className="text-base font-normal text-[#94A3B8] ml-1">{unit}</span>
       </div>
-      <div className="text-xs mt-1 opacity-70">목표: {target}{unit}</div>
+      <div className="text-xs text-[#94A3B8] mt-2">목표 {target}{unit}</div>
     </div>
   );
 }

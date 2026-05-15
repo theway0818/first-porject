@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64" role="img" aria-label="ONE FLOW wordmark dark">
+  <defs>
+    <linearGradient id="flowGradDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <linearGradient id="dividerGradDark" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#60A5FA" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#A78BFA" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 다크 배경 -->
+  <rect x="0" y="0" width="280" height="64" rx="8" fill="#0F172A"/>
+
+  <!-- "ONE" - 흰색/밝은 계열 -->
+  <text
+    x="14"
+    y="43"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="34"
+    font-weight="800"
+    letter-spacing="4"
+    fill="#F8FAFC"
+  >ONE</text>
+
+  <!-- S-커브 브릿지 -->
+  <path
+    d="M 124 26 C 128 26, 128 32, 132 32 C 136 32, 136 38, 140 38"
+    fill="none"
+    stroke="url(#flowGradDark)"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <circle cx="124" cy="26" r="2.8" fill="#60A5FA"/>
+  <circle cx="140" cy="38" r="2.8" fill="#A78BFA"/>
+
+  <!-- "FLOW" - 밝은 그라디언트 -->
+  <text
+    x="148"
+    y="43"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="34"
+    font-weight="300"
+    letter-spacing="5"
+    fill="url(#flowGradDark)"
+  >FLOW</text>
+
+  <!-- 하단 장식 라인 -->
+  <rect x="14" y="51" width="252" height="1.2" rx="0.6" fill="url(#dividerGradDark)"/>
+
+  <!-- 서브태그라인 -->
+  <text
+    x="14"
+    y="62"
+    font-family="'Segoe UI', 'Helvetica Neue', 'Inter', Arial, sans-serif"
+    font-size="8"
+    font-weight="400"
+    letter-spacing="3.5"
+    fill="#64748B"
+  >TEAM COLLABORATION</text>
+</svg>

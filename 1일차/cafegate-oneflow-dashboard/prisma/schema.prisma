@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model CodeRequest {
@@ -64,11 +64,25 @@ model ProjectTask {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-  team  String
-  role  String @default("MEMBER")
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  team         String
+  role         String        @default("MEMBER") // MEMBER | ADMIN
+  password     String?
+  createdAt    DateTime      @default(now())
+  activityLogs ActivityLog[]
+}
+
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  action     String   // CREATE | UPDATE | DELETE | LOGIN
+  target     String   // CodeRequest | Project | ProjectTask 등
+  targetId   Int?
+  detail     String?
+  createdAt  DateTime @default(now())
 }
 
 model KpiLog {
