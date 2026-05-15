@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "카페게이트 ONE FLOW 대시보드",
-  description: "카페게이트 구매물류팀 협업 대시보드",
+  title: "ONE FLOW — 모든 업무, 하나의 흐름으로",
+  description: "운영팀 업무 흐름 관리 플랫폼. 요청, 태스크, KPI, 일정이 하나로 연결됩니다.",
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-[#FAF6F0]" style={{ fontFamily: "'Pretendard', sans-serif" }}>
+      <body className="antialiased bg-white" style={{ fontFamily: "'Pretendard', sans-serif" }}>
         {children}
       </body>
     </html>
