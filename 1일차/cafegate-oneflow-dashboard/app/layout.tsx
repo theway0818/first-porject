@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ONE FLOW — 모든 업무, 하나의 흐름으로",
-  description: "운영팀 업무 흐름 관리 플랫폼. 요청, 태스크, KPI, 일정이 하나로 연결됩니다.",
+  description: "지금 우리 팀 업무, 한눈에 파악하고 있나요? ONE FLOW는 협업툴·팀 대시보드·업무관리를 하나로 통합해 정보 파편화를 끝냅니다.",
 };
 
 export default function RootLayout({
