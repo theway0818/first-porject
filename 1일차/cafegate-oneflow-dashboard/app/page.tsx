@@ -4,6 +4,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import TeamCalendar, { CalendarEvent } from "@/components/TeamCalendar";
 import OneFlowLogo from "@/components/OneFlowLogo";
+import AuthMenu from "@/components/AuthMenu";
 
 const roles = [
   {
@@ -47,38 +48,42 @@ function toDateStr(d: Date) {
 async function getCalendarEvents(): Promise<CalendarEvent[]> {
   const events: CalendarEvent[] = [];
 
-  const tasks = await prisma.projectTask.findMany({
-    where: { status: { not: "DONE" } },
-    include: { project: { select: { projectName: true } } },
-  });
-
-  tasks.forEach((t) => {
-    events.push({
-      id: `task-${t.id}`,
-      date: toDateStr(new Date(t.dueDate)),
-      title: t.taskName,
-      team: t.teamName,
-      type: "task",
-      status: t.status,
+  try {
+    const tasks = await prisma.projectTask.findMany({
+      where: { status: { not: "DONE" } },
+      include: { project: { select: { projectName: true } } },
     });
-  });
 
-  const deliveries = await prisma.codeRequest.findMany({
-    where: { cjDeliveryDate: { not: null }, completed: false },
-    select: { id: true, productName: true, requestTeam: true, cjDeliveryDate: true, status: true },
-  });
-
-  deliveries.forEach((r) => {
-    if (!r.cjDeliveryDate) return;
-    events.push({
-      id: `delivery-${r.id}`,
-      date: toDateStr(new Date(r.cjDeliveryDate)),
-      title: `🚚 ${r.productName}`,
-      team: r.requestTeam,
-      type: "delivery",
-      status: r.status,
+    tasks.forEach((t) => {
+      events.push({
+        id: `task-${t.id}`,
+        date: toDateStr(new Date(t.dueDate)),
+        title: t.taskName,
+        team: t.teamName,
+        type: "task",
+        status: t.status,
+      });
     });
-  });
+
+    const deliveries = await prisma.codeRequest.findMany({
+      where: { cjDeliveryDate: { not: null }, completed: false },
+      select: { id: true, productName: true, requestTeam: true, cjDeliveryDate: true, status: true },
+    });
+
+    deliveries.forEach((r) => {
+      if (!r.cjDeliveryDate) return;
+      events.push({
+        id: `delivery-${r.id}`,
+        date: toDateStr(new Date(r.cjDeliveryDate)),
+        title: `🚚 ${r.productName}`,
+        team: r.requestTeam,
+        type: "delivery",
+        status: r.status,
+      });
+    });
+  } catch (e) {
+    console.warn("[home] DB 조회 실패 — 빈 캘린더로 렌더:", e instanceof Error ? e.message : e);
+  }
 
   return events;
 }
@@ -103,13 +108,14 @@ export default async function HomePage() {
             <OneFlowLogo variant="horizontal" height={32} />
           </Link>
           <div className="flex items-center gap-3">
-            <span className="text-xs text-[#94A3B8] hidden sm:block">{today}</span>
+            <span className="text-xs text-[#94A3B8] hidden md:block">{today}</span>
             <Link
               href="/request/new"
               className="text-xs font-medium bg-[#0F172A] text-white px-4 py-2 rounded-full hover:bg-[#1E293B] transition-colors"
             >
               요청 등록
             </Link>
+            <AuthMenu />
           </div>
         </div>
       </header>
