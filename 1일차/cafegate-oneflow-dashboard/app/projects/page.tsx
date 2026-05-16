@@ -4,12 +4,28 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ProjectCard from "@/components/ProjectCard";
 import OneFlowLogo from "@/components/OneFlowLogo";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function ProjectsPage() {
-  const projects = await prisma.project.findMany({
-    include: { tasks: true, codeRequests: true },
-    orderBy: { launchDate: "asc" },
-  });
+  const supabase = createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  async function loadProjects() {
+    try {
+      return await prisma.project.findMany({
+        include: { tasks: true, codeRequests: true },
+        orderBy: { launchDate: "asc" },
+      });
+    } catch (e) {
+      console.warn("[projects] DB 조회 실패 — 빈 목록으로 렌더:", e instanceof Error ? e.message : e);
+      return [];
+    }
+  }
+  const projects = await loadProjects();
+
+  const newHref = user ? "/projects/new" : "/login?next=/projects/new";
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A]">
@@ -22,9 +38,17 @@ export default async function ProjectsPage() {
               <p className="text-sm font-bold text-[#0F172A]">프로젝트 보드</p>
             </div>
           </div>
-          <Link href="/" className="text-xs text-[#94A3B8] hover:text-[#475569] transition-colors">
-            ← 홈
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href={newHref}
+              className="text-xs font-medium bg-[#0F172A] text-white px-4 py-2 rounded-full hover:bg-[#1E293B] transition-colors"
+            >
+              + 새 프로젝트
+            </Link>
+            <Link href="/" className="text-xs text-[#94A3B8] hover:text-[#475569] transition-colors">
+              ← 홈
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -54,7 +78,13 @@ export default async function ProjectsPage() {
           <div className="text-center py-24 text-[#94A3B8]">
             <p className="text-3xl mb-3">🗂</p>
             <p className="font-medium text-[#475569] mb-1">등록된 프로젝트가 없어요</p>
-            <p className="text-sm">프로젝트를 생성해서 팀 업무를 관리해보세요</p>
+            <p className="text-sm mb-5">프로젝트를 생성해서 팀 업무를 관리해보세요</p>
+            <Link
+              href={newHref}
+              className="inline-block text-sm font-medium bg-[#0F172A] text-white px-5 py-2.5 rounded-full hover:bg-[#1E293B] transition-colors"
+            >
+              + 새 프로젝트 만들기
+            </Link>
           </div>
         )}
       </main>
